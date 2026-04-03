@@ -228,7 +228,7 @@ Command: `curl http://sensitive-web-server.example.test:8080`
 **Yields:** 
 
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%201%20(1).png)
-- "Failed to connect to 'URL', port 8080 ater 2 ms: Could not connect to server..."
+- `"Failed to connect to 'URL', port 8080 ater 2 ms: Could not connect to server..."`
 
 Summary:
 - Connection is denied.
