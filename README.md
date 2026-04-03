@@ -87,8 +87,9 @@ Command: ./easyrsa init-pki
 
 **Result:**
 This creates the katalogue: pki/ (pki = public key infrastructure)
+
 **Building CA:**
-Command: ./easyrsa build-ca
+- Command: ./easyrsa build-ca
 
 **Promts me to:**
 - Enter a password
