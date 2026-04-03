@@ -1,13 +1,72 @@
 # x.509-Lab - Certificates-mTLS
 A lab highlighting the importances of safe and verifiable communication and information exchange, using mTLS.
 
-# Objectives:
-- Setup a X.509 CA using the "easy-rsa" utility (version >3)
-- Generate and sign a "server certificate" for the web server
-- Generate and sign a "client certificate" for the client script
-- Configure web server to support HTTPS, trust the CA and require client certificate authentication
-- Configure client script to use HTTPS, trust the CA and authenticate using the client
-certificate
+## Introduction / Lab Context
+
+This lab demonstrates secure communication using **TLS and mutual TLS (mTLS)** in a controlled virtual environment. The setup simulates a real-world client-server system where both sides must authenticate each other using certificates issued by a shared Certificate Authority (CA).
+
+The environment consists of containerized services orchestrated using **Docker Compose**, with a clearly separated client and server setup.
+
+### System Overview
+
+- **Web server**
+  - Runs an **Nginx** instance configured for HTTPS
+  - Requires client certificate authentication (mTLS enabled)
+  - Serves a test endpoint used for validation and response testing
+  - Configured to listen on HTTPS port `443` (instead of insecure HTTP `8080`)
+
+- **Client**
+  - A simulated client script (`client.sh`)
+  - Uses `curl` to communicate with the server
+  - Configured to:
+    - Trust the CA certificate
+    - Present a client certificate and private key
+    - Authenticate against the server using mTLS
+
+- **Certificate Authority (CA)**
+  - Built using `easy-rsa` (version >3)
+  - Issues and signs both:
+    - Server certificates
+    - Client certificates
+  - Acts as the shared trust anchor between both parties
+
+### Communication Flow
+
+- The client communicates with the server using a defined **HTTPS URL**
+- The URL resolves to the Nginx web server inside the Docker network
+- TLS encryption ensures confidentiality of all traffic
+- mTLS ensures both:
+  - The client verifies the server identity (via CA trust)
+  - The server verifies the client identity (via client certificate)
+
+### Key Infrastructure Components
+
+- `docker-compose.yml`  
+  Defines and connects the client and server containers in a shared network
+
+- `server.conf` (Nginx configuration)  
+  Enables HTTPS, loads certificates, and enforces client authentication
+
+- `client.sh`  
+  Wrapper script around `curl` used to simulate authenticated client requests
+
+- Shared certificate volumes  
+  Certificates (`.crt`, `.key`, CA files) are mounted into containers via shared directories (`server_share`, `client_share`)
+
+### Purpose of the Lab
+
+The goal is to demonstrate:
+
+- How a **PKI (Public Key Infrastructure)** is constructed using a CA
+- How certificates are generated, signed, and distributed using `easy-rsa`
+- How HTTPS differs from HTTP in terms of security and traffic visibility
+- How **mTLS enforces mutual authentication**, not just encryption
+- What happens when certificates are:
+  - Valid and trusted
+  - Missing
+  - Incorrect or unsigned by the trusted CA
+
+This provides a practical understanding of how secure communication is implemented in modern service architectures.
 
 # Documentation:
 **Lab report/documentation:**
