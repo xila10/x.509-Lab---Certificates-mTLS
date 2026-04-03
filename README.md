@@ -318,8 +318,11 @@ If the client does not present any certificate, or if the certificate is signed 
 Using tcpdump sniff trafic:
 Command: sudo tcpdump -i lab-x509_tls port 443 -A
 
+
+
 Gives:
 
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Sk%C3%A4rmbild%202026-04-03%20120613.png)
 
 This is encrypted HTTPS-traffic.
 
@@ -335,7 +338,9 @@ This is encrypted HTTPS-traffic.
 
 **Catching the curl-request:**
 
-Pure plain text, unsafe HTTP-traffic!
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Sk%C3%A4rmbild%202026-04-03%20120620.png)
+
+- Pure plain text, unsafe HTTP-traffic!
 
 # Running docker-compose:
 **Wrong client settings:**
