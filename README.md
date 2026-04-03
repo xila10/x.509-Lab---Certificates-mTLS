@@ -221,7 +221,9 @@ Will be using curl to test functions and demonstrate the differences in in acces
 Opens an interactive shell within the container.
 Command: "curl http://sensitive-web-server.example.test:8080"
 
-**Yields:**
+![alt-text](bildens-länk-eller-path)
+
+**Yields:** "Failed to connect to 'URL', port 8080 ater 2 ms: Could not connect to server..."
 
 Summary:
 - Connection is denied.
