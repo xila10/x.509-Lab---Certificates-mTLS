@@ -1,7 +1,7 @@
 # x.509-Lab---Certificates-mTLS
 A lab highlighting the importances of safe and verifiable communication and information exchange, using mTLS.
 
-Objectives:
+**Objectives:**
 Mandatory ("G")
 - Setup a X.509 CA using the "easy-rsa" utility (version >3)
 - Generate and sign a "server certificate" for the web server
@@ -11,7 +11,7 @@ authentication
 - Configure client script to use HTTPS, trust the CA and authenticate using the client
 certificate
 
-Documentation:
+**Documentation:**
 Lab report/documentation
 Each student should submit a lab report containing **at least** the following
 information ("G"):
@@ -30,27 +30,27 @@ Initiate PKI:
 Location: ~/easy-rsa-lab
 Command: ./easyrsa init-pki
 
-Result:
+**Result:**
 This creates the katalogue: pki/ (pki = public key infrastructure)
-Building CA:
+**Building CA:**
 Command: ./easyrsa build-ca
 
-Promts me to:
+**Promts me to:**
 -Enter a password
 -Enter Common Name (CN)
 
-Purpose:
+**Purpose:**
 -Used to sign and verify all certificates in the lab.
 
-It signs:
+**It signs:**
 -server certificates (nginx)
 -client certificates (curl)
 
-It is used by:
+**It is used by:**
 -the client to trust the server
 -the server to verify the client (mTLS)
 
-Result of: ./easyrsa build-ca:
+**Result of:** ./easyrsa build-ca:
 "No Easy-RSA 'vars' configuration file exists!"
 
 -In modern Easy-RSA versions, it is not always necessary anymore, but the script still
@@ -58,14 +58,14 @@ warns if it is missing.
 -Passphrase: "hello123"
 - Choosing CA: "x509_Lab" - The name contained within the certificate.
 
-Result:
+**Result:**
 - /home/vagrant/easy-rsa-lab/pki/ca.crt - This is the name of the actual file.
 
-We now have:
+**We now have:**
 -pki/ca.crt → public CA (to be shared with client + server)
 -pki/private/ca.key → private CA (should never be shared)
 
-Copying ca.crt to each catalogue:
+**Copying ca.crt to each catalogue:**
 -cp pki/ca.crt /vagrant/x509_tls/server_share/
 -cp pki/ca.crt /vagrant/x509_tls/client_share/
 
@@ -75,7 +75,7 @@ Creating server key + CSR:
 ./easyrsa gen-req sensitive-web-server.example.test nopass
 
 
-Creates:
+**Creates:**
 -pki/private/sensitive-web-server.example.test.key
 -pki/reqs/sensitive-web-server.example.test.req (this is the CSR, will be used to create the cert by the CA)
 
