@@ -77,20 +77,20 @@ This provides a practical understanding of how secure communication is implement
 
 # 1. Creating Certificate Authority (CA)
 Copy easy-rsa to home:
-- cp -r /usr/share/easy-rsa ~/easy-rsa-lab
-- cd ~/easy-rsa-lab
+- `cp -r /usr/share/easy-rsa ~/easy-rsa-lab`
+- `cd ~/easy-rsa-lab`
 
 Keeping it cleaner.
 
 Initiate PKI:
-- Location: ~/easy-rsa-lab
-- Command: ./easyrsa init-pki
+- Location: `~/easy-rsa-lab`
+- Command: `./easyrsa init-pki`
 
 **Result:**
 This creates the katalogue: pki/ (pki = public key infrastructure)
 
 **Building CA:**
-- Command: ./easyrsa build-ca
+- Command: `./easyrsa build-ca`
 
 **Promts me to:**
 - Enter a password
@@ -107,53 +107,53 @@ This creates the katalogue: pki/ (pki = public key infrastructure)
 - the client to trust the server
 - the server to verify the client (mTLS)
 
-**Result of:** *./easyrsa build-ca:*
-"No Easy-RSA 'vars' configuration file exists!"
+**Result of:** `./easyrsa build-ca:`
+"No Easy-RSA `'vars'` configuration file exists!"
 
 - In modern Easy-RSA versions, it is not always necessary anymore, but the script still
 warns if it is missing.
-- Passphrase: "hello123"
-- Choosing CA: "x509_Lab" - The name contained within the certificate.
+- Passphrase: `"hello123"`
+- Choosing CA: `"x509_Lab"` - The name contained within the certificate.
 
 **Result:**
-- /home/vagrant/easy-rsa-lab/pki/ca.crt - This is the name of the actual *file*.
+- `/home/vagrant/easy-rsa-lab/pki/ca.crt` - This is the name of the actual *file*.
 
 **We now have:**
-- pki/ca.crt → public CA (to be shared with client + server)
-- pki/private/ca.key → private CA (should never be shared)
+- `pki/ca.crt` → public CA (to be shared with client + server)
+- `pki/private/ca.key` → private CA (should never be shared)
 
 **Copying ca.crt to each catalogue:**
-- cp pki/ca.crt /vagrant/x509_tls/server_share/
-- cp pki/ca.crt /vagrant/x509_tls/client_share/
+- `cp pki/ca.crt /vagrant/x509_tls/server_share/`
+- `cp pki/ca.crt /vagrant/x509_tls/client_share/`
 
 # 2. Creating server certificate
 **Creating server key + CSR:**
-- ./easyrsa gen-req sensitive-web-server.example.test nopass
+- `./easyrsa gen-req sensitive-web-server.example.test nopass`
 
 **Creates:**
-- pki/private/sensitive-web-server.example.test.key
-- pki/reqs/sensitive-web-server.example.test.req (this is the CSR, will be used to create the cert by the CA)
+- `pki/private/sensitive-web-server.example.test.key`
+- `pki/reqs/sensitive-web-server.example.test.req` (this is the CSR, will be used to create the cert by the CA)
 
 **Asked to name cert och key:****
-- Has to match webserver-URL -> "sensitive-web-server.example.test"
+- Has to match `Webserver-URL` -> `"sensitive-web-server.example.test"`
 
 **Signing server certificate with my CA:**
-- ./easyrsa sign-req server sensitive-web-server.example.test
+- `./easyrsa sign-req server sensitive-web-server.example.test`
 
 'yes' to confirm.
 
 **We now have:**
-- pki/issued/sensitive-web-server.example.test.crt
-- pki/private/sensitive-web-server.example.test.key
+- `pki/issued/sensitive-web-server.example.test.crt`
+- `pki/private/sensitive-web-server.example.test.key`
 
 **Copying to server_share:**
-- cp pki/private/sensitive-web-server.example.test.key /vagrant/x509_tls/server_share
-- cp pki/issued/sensitive-web-server.example.test.crt /vagrant/x509_tls/server_share
+- `cp pki/private/sensitive-web-server.example.test.key /vagrant/x509_tls/server_share`
+- `cp pki/issued/sensitive-web-server.example.test.crt /vagrant/x509_tls/server_share`
 
 # 3. Creating client certificate
 **Creating client key + CSR:**
-- cd ~/easy-rsa-lab
-- ./easyrsa gen-req client1 nopass
+- `cd ~/easy-rsa-lab`
+- `./easyrsa gen-req client1 nopass`
 
 **Choosing a name:** "lab_klient"
 - This name is how the client will be identified – like writing "Alice" or "John" etc.
@@ -162,22 +162,22 @@ warns if it is missing.
 **client1** is used within file-/certificate names.
 
 **Creating:**
-- req: /home/vagrant/easy-rsa-lab/pki/reqs/client1.req
-- key: /home/vagrant/easy-rsa-lab/pki/private/client1.key
+- req: `/home/vagrant/easy-rsa-lab/pki/reqs/client1.req`
+- key: `/home/vagrant/easy-rsa-lab/pki/private/client1.key`
 
 **Signing client certificate:**
-- ./easyrsa sign-req client client1
+- `./easyrsa sign-req client client1`
 
 **Signed certificate:** /home/vagrant/easy-rsa-lab/pki/issued/client1.crt
 ‘klient_lab’ identifies with ‘client1’ related files.
 
 **We now have the following:**
-- pki/issued/client1.crt
-- pki/private/client1.key
+- `pki/issued/client1.crt`
+- `pki/private/client1.key`
 
 **Copying to client_share:**
-- cp pki/private/client1.key /vagrant/x509_tls/client_share/
-- cp pki/issued/client1.crt /vagrant/x509_tls/client_share/
+- `cp pki/private/client1.key /vagrant/x509_tls/client_share/`
+- `cp pki/issued/client1.crt /vagrant/x509_tls/client_share/`
 
 **The client now has certificate which is:**
 - signed by the CA
@@ -186,22 +186,22 @@ warns if it is missing.
 # 4. Configuring the webserver (nginx)
 
 **Entering:**
-- /vagrant/x509_tls/server.conf
+- `/vagrant/x509_tls/server.conf`
 
 **Changing from HTTP to HTTPS:**
-- ’listen 8080’; -> ’listen 443 ssl’; (standard port for https + prot. TLS ‘Transport Layer Security’.
+- `’listen 8080’`; -> `’listen 443 ssl’`; (standard port for https + prot. TLS ‘Transport Layer Security’)
 
 **Adding server certificate + key:**
-In the block: server { ... };
-- ssl_certificate /share/sensitive-web-server.example.test.crt;
-- ssl_certificate_key /share/sensitive-web-server.example.test.key;
+In the block: `server { ... };`
+- `ssl_certificate /share/sensitive-web-server.example.test.crt;`
+- `ssl_certificate_key /share/sensitive-web-server.example.test.key;`
 
 **And:**
-- ssl_client_certificate /share/ca.crt;
+- `ssl_client_certificate /share/ca.crt;`
 - This: trusting specifik CA to validate certificates.
 
 **Finaly:**
-- ssl_verify_client on;
+- `ssl_verify_client on;`
 - demands a client certificate.
 
 **Results:**
@@ -220,7 +220,7 @@ Will be using `curl` to test functions and demonstrate the differences in in acc
 ## Test #1: "HTTP port: 8080 failing"
 
 Opens an interactive shell within the container.
-Command: "curl http://sensitive-web-server.example.test:8080"
+Command: `curl http://sensitive-web-server.example.test:8080`
 
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%201.png)
 
@@ -238,8 +238,7 @@ Summary:
 
 ## Test #2: "connecting with proper authentication"
 
-Command: "curl --cert /share/client1.crt --key /share/client1.key --cacert /share/ca.crt
-https://sensitive-web-server.example.test/"
+Command: `curl --cert /share/client1.crt --key /share/client1.key --cacert /share/ca.crt https://sensitive-web-server.example.test/`
 
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%202.png)
 
@@ -263,12 +262,12 @@ Private keys are never transmitted — they are only used locally to prove ident
 
 ## Test #3: "HTTP/HTTPS + missing certificate"
 
-Command: "curl http://sensitive-web-server.example.test/"
+Command: `curl http://sensitive-web-server.example.test/`
 
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%203.png)
 - Reacting as expected; "http, failed to connect”.
 
-Command: "curl https://sensitive-web-server.example.test/"
+Command: `curl https://sensitive-web-server.example.test/`
 
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%203%20(1).png)
 - It shows that the absence of a valid SSL certificate is now the issue; HTTPS is being accepted.
@@ -289,7 +288,7 @@ So:
 ## Test #4: ‘Certs not matching’
 I have created a new set of certificate + key, not signed by the trusted CA; demonstrating the outcome of non-matching certificates.
 
-Command: curl --cert /share/badclient.crt --key /share/badclient.key --cacert /share/ca.crt https://sensitive-web-server.example.test/
+Command: `curl --cert /share/badclient.crt --key /share/badclient.key --cacert /share/ca.crt https://sensitive-web-server.example.test/`
 
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%204.png)
 
@@ -328,11 +327,11 @@ Command: sudo tcpdump -i lab-x509_tls port 443 -A
 
 **Terminal 1:**
 - Opens a new terminal, entering an interactive client shell.
-- Command: "curl http://sensitive-web-server.example.test:8080"
+- Command: `curl http://sensitive-web-server.example.test:8080`
 - Changing server och client to once again listen and send traffic on http port:8080.
 
 **Terminal 2:**
-- Command: sudo tcpdump -i lab-x509_tls port 8080 -A
+- Command: `sudo tcpdump -i lab-x509_tls port 8080 -A`
 
 **Catching the curl-request:**
 
@@ -353,9 +352,9 @@ Not using HTTPS yet, trying to connect to port: 8080.
 **Opening the skrip: client.sh**
 
 **Changing:**
-- TARGET_URL="http://{TARGET_SERVER_ADDRESS}:8080/"
+- `TARGET_URL="http://{TARGET_SERVER_ADDRESS}:8080/`
 To:
-- TARGET_URL="https://{TARGET_SERVER_ADDRESS}/"
+- `TARGET_URL="https://{TARGET_SERVER_ADDRESS}/`
 
 **Adding:**
 ````
