@@ -224,6 +224,7 @@ Command: "curl http://sensitive-web-server.example.test:8080"
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%201.png)
 
 **Yields:** 
+
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%201%20(1).png)
 - "Failed to connect to 'URL', port 8080 ater 2 ms: Could not connect to server..."
 
@@ -267,6 +268,7 @@ Command: "curl http://sensitive-web-server.example.test/"
 - Reacting as expected; "http, failed to connect”.
 
 Command: "curl https://sensitive-web-server.example.test/"
+
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%203%20(1).png)
 - It shows that the absence of a valid SSL certificate is now the issue; HTTPS is being accepted.
 
@@ -300,6 +302,7 @@ Trying to connect using a different key and certificate → the CA trusted by th
 NGINX has rejected the TLS handshake.
 
 **Right cert. + key:**
+
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%204%20(2).png)
 - We gain access!
 
