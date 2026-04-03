@@ -151,13 +151,13 @@ The server now:
 - demands a client certificate to authenticate.
 - verifies the client certificate using its local CA trust store (ca.crt).
 
-## Tests:
+# Tests:
 Restarting the stack, building anew: docker compose up -d –build.
 Will be using curl to test functions and demonstrate the differences in in accessibility and security.
 
 **Entering client container:** docker compose exec client bash
 
-# Test #1: "HTTP port: 8080 failing"
+## Test #1: "HTTP port: 8080 failing"
 
 Opens an interactive shell within the container.
 Command: "curl http://sensitive-web-server.example.test:8080"
@@ -171,7 +171,7 @@ Summary:
 - (For HTTPS to function → a client certificate is required)
 -T his is an infrastructure/configuration control, not a security control.
 
-# Test #2: "connecting with proper authentication"
+## Test #2: "connecting with proper authentication"
 
 Command: "curl --cert /share/client1.crt --key /share/client1.key --cacert /share/ca.crt
 https://sensitive-web-server.example.test/"
@@ -194,7 +194,7 @@ Private keys are never transmitted — they are only used locally to prove ident
 - Access is granted only with valid authentication.
 - This is a security control (authentication + encryption).
 
-# Test #3: "HTTP/HTTPS + missing certificate"
+## Test #3: "HTTP/HTTPS + missing certificate"
 
 Command: "curl http://sensitive-web-server.example.test/"
 -Reacting as expected; "http, failed to connect”.
@@ -215,7 +215,7 @@ So:
 -Both sides require local ‘trust anchors’.
 -Neither side automatically trusts the other.
 
-# Test #4: ‘Certs not matching’
+## Test #4: ‘Certs not matching’
 I have created a new set of certificate + key, not signed by the trusted CA;
 demonstrating the outcome of non-matching certificates.
 Command: curl --cert /share/badclient.crt --key /share/badclient.key --cacert
@@ -238,7 +238,7 @@ certificate; otherwise, access is rejected.
 
 If the client does not present any certificate, or if the certificate is signed by a different CA, the validation fails and the connection is denied.
 
-# Test #5: "HTTP vs HTTPS" traffic’
+## Test #5: "HTTP vs HTTPS" traffic’
 Using tcpdump sniff trafic:
 Command: sudo tcpdump -i lab-x509_tls port 443 -A
 
