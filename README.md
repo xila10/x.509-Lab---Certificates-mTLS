@@ -223,7 +223,9 @@ Command: "curl http://sensitive-web-server.example.test:8080"
 
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%201.png)
 
-**Yields:** "Failed to connect to 'URL', port 8080 ater 2 ms: Could not connect to server..."
+**Yields:** 
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%201%20(1).png)
+- "Failed to connect to 'URL', port 8080 ater 2 ms: Could not connect to server..."
 
 Summary:
 - Connection is denied.
@@ -236,6 +238,8 @@ Summary:
 
 Command: "curl --cert /share/client1.crt --key /share/client1.key --cacert /share/ca.crt
 https://sensitive-web-server.example.test/"
+
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%202.png)
 
 Greeted with server´s response; The connection attempt succeeds and we receive the
 random generator’s response. **Success!**
@@ -258,9 +262,12 @@ Private keys are never transmitted — they are only used locally to prove ident
 ## Test #3: "HTTP/HTTPS + missing certificate"
 
 Command: "curl http://sensitive-web-server.example.test/"
+
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%203.png)
 - Reacting as expected; "http, failed to connect”.
 
 Command: "curl https://sensitive-web-server.example.test/"
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%203%20(1).png)
 - It shows that the absence of a valid SSL certificate is now the issue; HTTPS is being accepted.
 
 **Principals:**
@@ -282,14 +289,19 @@ demonstrating the outcome of non-matching certificates.
 Command: curl --cert /share/badclient.crt --key /share/badclient.key --cacert
 /share/ca.crt https://sensitive-web-server.example.test/
 
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%204.png)
+
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%204%20(1).png)
+
 **Result:**
-"400 SSL certificate error", "400 Bad Request", "SSL certificate error" etc.
+- "400 SSL certificate error", "400 Bad Request", "SSL certificate error" etc.
 
 Trying to connect using a different key and certificate → the CA trusted by the server has NOT been used to validate them, resulting in a “400 SSL… / Bad Request” response →
 NGINX has rejected the TLS handshake.
 
 **Right cert. + key:**
-We gain access!
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%204%20(2).png)
+- We gain access!
 
 **Summary of tests:**
 The server is no longer exposed via HTTP (port 8080). Access to the service is provided
