@@ -1,19 +1,16 @@
 # x.509-Lab - Certificates-mTLS
 A lab highlighting the importances of safe and verifiable communication and information exchange, using mTLS.
 
-**Objectives:**
+# Objectives:
 - Setup a X.509 CA using the "easy-rsa" utility (version >3)
 - Generate and sign a "server certificate" for the web server
 - Generate and sign a "client certificate" for the client script
-- Configure web server to support HTTPS, trust the CA and require client certificate
-authentication
+- Configure web server to support HTTPS, trust the CA and require client certificate authentication
 - Configure client script to use HTTPS, trust the CA and authenticate using the client
 certificate
 
-**Documentation:**
-Lab report/documentation
-Each student should submit a lab report containing **at least** the following
-information:
+# Documentation:**
+**Lab report/documentation:**
 - Description of which programs/commands were used to generate certificates
 - Documentation of changes to the client script and server configuration
 - Demonstration of how the implemented changes improve security of the service
