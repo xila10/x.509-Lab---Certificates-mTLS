@@ -197,10 +197,10 @@ Private keys are never transmitted — they are only used locally to prove ident
 ## Test #3: "HTTP/HTTPS + missing certificate"
 
 Command: "curl http://sensitive-web-server.example.test/"
--Reacting as expected; "http, failed to connect”.
+- Reacting as expected; "http, failed to connect”.
 
 Command: "curl https://sensitive-web-server.example.test/"
--It shows that the absence of a valid SSL certificate is now the issue; HTTPS is being accepted.
+- It shows that the absence of a valid SSL certificate is now the issue; HTTPS is being accepted.
 
 **Principals:**
 The server presents its certificate, but the client lacks a trusted CA to verify it and
@@ -210,10 +210,10 @@ why we need to configure a trusted CA in server.conf (+server_share) as well as 
 client_share folder – giving them a shared “root of trust”.
 
 So:
--Server certificate → verified by the client using a CA.
--Client certificate → verified by the server using the same CA.
--Both sides require local ‘trust anchors’.
--Neither side automatically trusts the other.
+- Server certificate → verified by the client using a CA.
+- Client certificate → verified by the server using the same CA.
+- Both sides require local ‘trust anchors’.
+- Neither side automatically trusts the other.
 
 ## Test #4: ‘Certs not matching’
 I have created a new set of certificate + key, not signed by the trusted CA;
@@ -245,16 +245,17 @@ Command: sudo tcpdump -i lab-x509_tls port 443 -A
 Gives:
 This is encrypted HTTPS-traffic.
 
-Without HTTPS:
+**Without HTTPS:**
 
 **Terminal 1:**
-Opens a new terminal, entering an interactive client shell.
-Command: "curl http://sensitive-web-server.example.test:8080"
-Changing server och client to once again listen and send traffic on http port:8080.
+- Opens a new terminal, entering an interactive client shell.
+- Command: "curl http://sensitive-web-server.example.test:8080"
+- Changing server och client to once again listen and send traffic on http port:8080.
 
 **Terminal 2:**
-Command: sudo tcpdump -i lab-x509_tls port 8080 -A
-Catching the curl-request:
+- Command: sudo tcpdump -i lab-x509_tls port 8080 -A
+
+**Catching the curl-request:**
 
 Pure plain text, unsafe HTTP-traffic!
 
@@ -283,7 +284,7 @@ curl \
 --cacert /share/ca.crt \
 "${TARGET_URL}"
 ````
-Success! With the correct authentication information, the client is granted access.
+- Success! With the correct authentication information, the client is granted access.
 
 # Wrapping up:
 - Demonstrated the core principles of secure communication using TLS and mutual TLS
