@@ -82,98 +82,99 @@ Asked to name cert och key:
 
 Has to match webserver-URL -> "sensitive-web-server.example.test"
 
-Signing server certificate with my CA:
-./easyrsa sign-req server sensitive-web-server.example.test
+**Signing server certificate with my CA:**
+- ./easyrsa sign-req server sensitive-web-server.example.test
 
 'yes' to confirm.
 
-We now have:
--pki/issued/sensitive-web-server.example.test.crt
--pki/private/sensitive-web-server.example.test.key
+**We now have:**
+- pki/issued/sensitive-web-server.example.test.crt
+- pki/private/sensitive-web-server.example.test.key
 
-Copying to server_share:
--cp pki/private/sensitive-web-server.example.test.key /vagrant/x509_tls/server_share
--cp pki/issued/sensitive-web-server.example.test.crt /vagrant/x509_tls/server_share
+**Copying to server_share:**
+- cp pki/private/sensitive-web-server.example.test.key /vagrant/x509_tls/server_share
+- cp pki/issued/sensitive-web-server.example.test.crt /vagrant/x509_tls/server_share
 
 #3. Creating client certificate
-Creating client key + CSR:
--cd ~/easy-rsa-lab
--./easyrsa gen-req client1 nopass
+**Creating client key + CSR:**
+- cd ~/easy-rsa-lab
+- ./easyrsa gen-req client1 nopass
 
--Choosing a name: "lab_klient"
--This name is how the client will be identified – like writing "Alice" or "John" etc.
----> Common Name (CN) withing the certificate.
+**Choosing a name:** "lab_klient"
+- This name is how the client will be identified – like writing "Alice" or "John" etc.
+- ---> Common Name (CN) withing the certificate.
 
--client1 = is used within file-/certificate names
+**client1** is used within file-/certificate names.
 
-Creating:
--req: /home/vagrant/easy-rsa-lab/pki/reqs/client1.req
--key: /home/vagrant/easy-rsa-lab/pki/private/client1.key
+**Creating:**
+- req: /home/vagrant/easy-rsa-lab/pki/reqs/client1.req
+- key: /home/vagrant/easy-rsa-lab/pki/private/client1.key
 
-Signing client certificate:
-./easyrsa sign-req client client1
-Signed certificate: /home/vagrant/easy-rsa-lab/pki/issued/client1.crt
+**Signing client certificate:**
+- ./easyrsa sign-req client client1
+
+**Signed certificate:** /home/vagrant/easy-rsa-lab/pki/issued/client1.crt
 ‘klient_lab’ identifies with ‘client1’ related files.
 
-We now have the following:
--pki/issued/client1.crt
--pki/private/client1.key
+**We now have the following:**
+- pki/issued/client1.crt
+- pki/private/client1.key
 
-Copying to client_share:
-cp pki/private/client1.key /vagrant/x509_tls/client_share/
-cp pki/issued/client1.crt /vagrant/x509_tls/client_share/
+**Copying to client_share:**
+- cp pki/private/client1.key /vagrant/x509_tls/client_share/
+- cp pki/issued/client1.crt /vagrant/x509_tls/client_share/
 
-The client now has certificate which is:
--signed by the CA
--can be used to authenticate the client (mTLS)
+**The client now has certificate which is:**
+- signed by the CA
+- can be used to authenticate the client (mTLS)
 
-Configuring the webserver (nginx)
+# Configuring the webserver (nginx)
 
-Entering:
-/vagrant/x509_tls/server.conf
-Chaning from HTTP to HTTPS:
--’listen 8080’;
-now:
--’listen 443 ssl’; (standard port for https + prot. TLS ‘Transport Layer Security’.
+**Entering:**
+- /vagrant/x509_tls/server.conf
 
-Adding server certificate + key:
+**Changing from HTTP to HTTPS:**
+- ’listen 8080’; -> ’listen 443 ssl’; (standard port for https + prot. TLS ‘Transport Layer Security’.
+
+**Adding server certificate + key:**
 In the block: server { ... };
--ssl_certificate /share/sensitive-web-server.example.test.crt;
--ssl_certificate_key /share/sensitive-web-server.example.test.key;
+- ssl_certificate /share/sensitive-web-server.example.test.crt;
+- ssl_certificate_key /share/sensitive-web-server.example.test.key;
 
-And:
--ssl_client_certificate /share/ca.crt;
--This: trusting specifik CA to validate certificates.
+**And:**
+- ssl_client_certificate /share/ca.crt;
+- This: trusting specifik CA to validate certificates.
 
-Finaly:
--ssl_verify_client on;
--demands a client certificate.
+**Finaly:**
+- ssl_verify_client on;
+- demands a client certificate.
 
 **Results:**
 The server now:
--uses HTTPS (TLS)
--presents the server certificate
--demands a client certificate to authenticate.
--verifies the client certificate using its local CA trust store (ca.crt).
+- uses HTTPS (TLS)
+- presents the server certificate
+- demands a client certificate to authenticate.
+- verifies the client certificate using its local CA trust store (ca.crt).
 
-Tests:
+**Tests:**
 Restarting the stack, building anew: docker compose up -d –build.
 Will be using curl to test functions and demonstrate the differences in in accessibility and security.
 
-Entering client container: docker compose exec client bash
+**Entering client container:** docker compose exec client bash
+
 # Test #1: "HTTP port: 8080 failing"
 
 Opens an interactive shell within the container.
 Command: "curl http://sensitive-web-server.example.test:8080"
 
-Yields:
+**Yields:**
 
 Summary:
--Connection is denied.
--The server is no longer listening on port 8080.
--The server is no longer exposed via insecure HTTP.
--(For HTTPS to function → a client certificate is required)
--This is an infrastructure/configuration control, not a security control.
+- Connection is denied.
+- The server is no longer listening on port 8080.
+- The server is no longer exposed via insecure HTTP.
+- (For HTTPS to function → a client certificate is required)
+-T his is an infrastructure/configuration control, not a security control.
 
 # Test #2: "connecting with proper authentication"
 
@@ -181,9 +182,9 @@ Command: "curl --cert /share/client1.crt --key /share/client1.key --cacert /shar
 https://sensitive-web-server.example.test/"
 
 Greeted with server´s response; The connection attempt succeeds and we receive the
-random generator’s response. Success!
+random generator’s response. **Success!**
 
-The process:
+**The process:**
 The client certificate (.crt) is sent to the server. The private key (.key) is never shared,
 it stays localy. The private key is used to sign parts of the TLS handshake, the server
 uses the public key in the certificate to verify the signature - this proves that the client
@@ -191,12 +192,12 @@ actually owns the certificate.
 
 Private keys are never transmitted — they are only used locally to prove identity.
 
-Summary:
--TLS is working.
--The server presents a valid certificate.
--The client is authenticated via the CA (mTLS).
--Access is granted only with valid authentication.
--This is a security control (authentication + encryption).
+**Summary:**
+- TLS is working.
+- The server presents a valid certificate.
+- The client is authenticated via the CA (mTLS).
+- Access is granted only with valid authentication.
+- This is a security control (authentication + encryption).
 
 # Test #3: "HTTP/HTTPS + missing certificate"
 
