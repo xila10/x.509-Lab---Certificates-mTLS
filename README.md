@@ -314,8 +314,8 @@ certificate; otherwise, access is rejected.
 If the client does not present any certificate, or if the certificate is signed by a different CA, the validation fails and the connection is denied.
 
 ## Test #5: "HTTP vs HTTPS" traffic’
-**Using tcpdump to sniff trafic:**
-Command: sudo tcpdump -i lab-x509_tls port 443 -A
+**Using `tcpdump` to sniff trafic:**
+Command: `sudo tcpdump -i lab-x509_tls port 443 -A`
 
 **Gives:**
 
@@ -346,7 +346,7 @@ Command: sudo tcpdump -i lab-x509_tls port 443 -A
 
 We have demonstrated this using curl so far; this is what it looks like when the
 application runs without a correctly configured client:
-"ERROR: Failed to request a top-secret quote from http://sensitive-web-server.example.test:8080/"
+`"ERROR: Failed to request a top-secret quote from http://sensitive-web-server.example.test:8080/"`
 Not using HTTPS yet, trying to connect to port: 8080.
 
 **Opening the skrip: client.sh**
