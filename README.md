@@ -20,7 +20,7 @@ certificate
 Copy easy-rsa to home:
 - cp -r /usr/share/easy-rsa ~/easy-rsa-lab
 - cd ~/easy-rsa-lab
--Keeping it cleaner.
+Keeping it cleaner.
 
 Initiate PKI:
 Location: ~/easy-rsa-lab
@@ -46,10 +46,10 @@ Command: ./easyrsa build-ca
 - the client to trust the server
 - the server to verify the client (mTLS)
 
-**Result of:** ./easyrsa build-ca:
+**Result of:** *./easyrsa build-ca:*
 "No Easy-RSA 'vars' configuration file exists!"
 
--In modern Easy-RSA versions, it is not always necessary anymore, but the script still
+- In modern Easy-RSA versions, it is not always necessary anymore, but the script still
 warns if it is missing.
 - Passphrase: "hello123"
 - Choosing CA: "x509_Lab" - The name contained within the certificate.
