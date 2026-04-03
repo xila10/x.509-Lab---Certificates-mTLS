@@ -79,11 +79,12 @@ This provides a practical understanding of how secure communication is implement
 Copy easy-rsa to home:
 - cp -r /usr/share/easy-rsa ~/easy-rsa-lab
 - cd ~/easy-rsa-lab
+
 Keeping it cleaner.
 
 Initiate PKI:
-Location: ~/easy-rsa-lab
-Command: ./easyrsa init-pki
+- Location: ~/easy-rsa-lab
+- Command: ./easyrsa init-pki
 
 **Result:**
 This creates the katalogue: pki/ (pki = public key infrastructure)
@@ -115,7 +116,7 @@ warns if it is missing.
 - Choosing CA: "x509_Lab" - The name contained within the certificate.
 
 **Result:**
-- /home/vagrant/easy-rsa-lab/pki/ca.crt - This is the name of the actual file.
+- /home/vagrant/easy-rsa-lab/pki/ca.crt - This is the name of the actual *file*.
 
 **We now have:**
 - pki/ca.crt → public CA (to be shared with client + server)
@@ -128,7 +129,6 @@ warns if it is missing.
 # 2. Creating server certificate
 **Creating server key + CSR:**
 - ./easyrsa gen-req sensitive-web-server.example.test nopass
-
 
 **Creates:**
 - pki/private/sensitive-web-server.example.test.key
@@ -212,10 +212,10 @@ The server now:
 - verifies the client certificate using its local CA trust store (ca.crt).
 
 # Tests:
-Restarting the stack, building anew: docker compose up -d –build.
-Will be using curl to test functions and demonstrate the differences in in accessibility and security.
+Restarting the stack, building anew: `docker compose up -d –build`
+Will be using `curl` to test functions and demonstrate the differences in in accessibility and security.
 
-**Entering client container:** docker compose exec client bash
+**Entering client container:** `docker compose exec client bash`
 
 ## Test #1: "HTTP port: 8080 failing"
 
