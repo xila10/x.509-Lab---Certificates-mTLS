@@ -286,10 +286,9 @@ So:
 - Neither side automatically trusts the other.
 
 ## Test #4: ‘Certs not matching’
-I have created a new set of certificate + key, not signed by the trusted CA;
-demonstrating the outcome of non-matching certificates.
-Command: curl --cert /share/badclient.crt --key /share/badclient.key --cacert
-/share/ca.crt https://sensitive-web-server.example.test/
+I have created a new set of certificate + key, not signed by the trusted CA; demonstrating the outcome of non-matching certificates.
+
+Command: curl --cert /share/badclient.crt --key /share/badclient.key --cacert /share/ca.crt https://sensitive-web-server.example.test/
 
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%204.png)
 
@@ -315,16 +314,14 @@ certificate; otherwise, access is rejected.
 If the client does not present any certificate, or if the certificate is signed by a different CA, the validation fails and the connection is denied.
 
 ## Test #5: "HTTP vs HTTPS" traffic’
-Using tcpdump sniff trafic:
+**Using tcpdump to sniff trafic:**
 Command: sudo tcpdump -i lab-x509_tls port 443 -A
 
-
-
-Gives:
+**Gives:**
 
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Sk%C3%A4rmbild%202026-04-03%20120613.png)
 
-This is encrypted HTTPS-traffic.
+- This is encrypted HTTPS-traffic.
 
 **Without HTTPS:**
 
