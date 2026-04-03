@@ -333,7 +333,7 @@ This is encrypted HTTPS-traffic.
 Pure plain text, unsafe HTTP-traffic!
 
 # Running docker-compose:
-Wrong client settings:
+**Wrong client settings:**
 
 We have demonstrated this using curl so far; this is what it looks like when the
 application runs without a correctly configured client:
