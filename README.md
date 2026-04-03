@@ -22,8 +22,8 @@ information ("G"):
 
 # 1. Creating Certificate Authority (CA)
 Copy easy-rsa to home:
-cp -r /usr/share/easy-rsa ~/easy-rsa-lab
-cd ~/easy-rsa-lab
+- cp -r /usr/share/easy-rsa ~/easy-rsa-lab
+- cd ~/easy-rsa-lab
 -Keeping it cleaner.
 
 Initiate PKI:
@@ -36,48 +36,47 @@ This creates the katalogue: pki/ (pki = public key infrastructure)
 Command: ./easyrsa build-ca
 
 **Promts me to:**
--Enter a password
--Enter Common Name (CN)
+- Enter a password
+- Enter Common Name (CN)
 
 **Purpose:**
--Used to sign and verify all certificates in the lab.
+- Used to sign and verify all certificates in the lab.
 
 **It signs:**
--server certificates (nginx)
--client certificates (curl)
+- server certificates (nginx)
+- client certificates (curl)
 
 **It is used by:**
--the client to trust the server
--the server to verify the client (mTLS)
+- the client to trust the server
+- the server to verify the client (mTLS)
 
 **Result of:** ./easyrsa build-ca:
 "No Easy-RSA 'vars' configuration file exists!"
 
 -In modern Easy-RSA versions, it is not always necessary anymore, but the script still
 warns if it is missing.
--Passphrase: "hello123"
+- Passphrase: "hello123"
 - Choosing CA: "x509_Lab" - The name contained within the certificate.
 
 **Result:**
 - /home/vagrant/easy-rsa-lab/pki/ca.crt - This is the name of the actual file.
 
 **We now have:**
--pki/ca.crt → public CA (to be shared with client + server)
--pki/private/ca.key → private CA (should never be shared)
+- pki/ca.crt → public CA (to be shared with client + server)
+- pki/private/ca.key → private CA (should never be shared)
 
 **Copying ca.crt to each catalogue:**
--cp pki/ca.crt /vagrant/x509_tls/server_share/
--cp pki/ca.crt /vagrant/x509_tls/client_share/
-
+- cp pki/ca.crt /vagrant/x509_tls/server_share/
+- cp pki/ca.crt /vagrant/x509_tls/client_share/
 
 # 2. Creating server certificate
-Creating server key + CSR:
-./easyrsa gen-req sensitive-web-server.example.test nopass
+**Creating server key + CSR:**
+- ./easyrsa gen-req sensitive-web-server.example.test nopass
 
 
 **Creates:**
--pki/private/sensitive-web-server.example.test.key
--pki/reqs/sensitive-web-server.example.test.req (this is the CSR, will be used to create the cert by the CA)
+- pki/private/sensitive-web-server.example.test.key
+- pki/reqs/sensitive-web-server.example.test.req (this is the CSR, will be used to create the cert by the CA)
 
 Asked to name cert och key:
 
