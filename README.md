@@ -74,9 +74,8 @@ warns if it is missing.
 - pki/private/sensitive-web-server.example.test.key
 - pki/reqs/sensitive-web-server.example.test.req (this is the CSR, will be used to create the cert by the CA)
 
-Asked to name cert och key:
-
-Has to match webserver-URL -> "sensitive-web-server.example.test"
+**Asked to name cert och key:****
+- Has to match webserver-URL -> "sensitive-web-server.example.test"
 
 **Signing server certificate with my CA:**
 - ./easyrsa sign-req server sensitive-web-server.example.test
