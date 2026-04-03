@@ -296,10 +296,9 @@ Command: `curl --cert /share/badclient.crt --key /share/badclient.key --cacert /
 ![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%204%20(1).png)
 
 **Result:**
-- "400 SSL certificate error", "400 Bad Request", "SSL certificate error" etc.
+- `"400 SSL certificate error", "400 Bad Request", "SSL certificate error"` etc.
 
-Trying to connect using a different key and certificate → the CA trusted by the server has NOT been used to validate them, resulting in a “400 SSL… / Bad Request” response →
-NGINX has rejected the TLS handshake.
+Trying to connect using a different key and certificate → the CA trusted by the server has NOT been used to validate them, resulting in a `“400 SSL… / Bad Request”` response → NGINX has rejected the TLS handshake.
 
 **Right cert. + key:**
 
