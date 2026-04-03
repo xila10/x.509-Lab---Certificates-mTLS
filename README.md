@@ -2,7 +2,6 @@
 A lab highlighting the importances of safe and verifiable communication and information exchange, using mTLS.
 
 **Objectives:**
-Mandatory ("G")
 - Setup a X.509 CA using the "easy-rsa" utility (version >3)
 - Generate and sign a "server certificate" for the web server
 - Generate and sign a "client certificate" for the client script
@@ -14,7 +13,7 @@ certificate
 **Documentation:**
 Lab report/documentation
 Each student should submit a lab report containing **at least** the following
-information ("G"):
+information:
 - Description of which programs/commands were used to generate certificates
 - Documentation of changes to the client script and server configuration
 - Demonstration of how the implemented changes improve security of the service
