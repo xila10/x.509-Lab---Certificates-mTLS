@@ -221,7 +221,7 @@ Will be using curl to test functions and demonstrate the differences in in acces
 Opens an interactive shell within the container.
 Command: "curl http://sensitive-web-server.example.test:8080"
 
-![alt-text](bildens-länk-eller-path)
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Test%201.png)
 
 **Yields:** "Failed to connect to 'URL', port 8080 ater 2 ms: Could not connect to server..."
 
