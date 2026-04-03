@@ -9,7 +9,7 @@ A lab highlighting the importances of safe and verifiable communication and info
 - Configure client script to use HTTPS, trust the CA and authenticate using the client
 certificate
 
-# Documentation:**
+# Documentation:
 **Lab report/documentation:**
 - Description of which programs/commands were used to generate certificates
 - Documentation of changes to the client script and server configuration
