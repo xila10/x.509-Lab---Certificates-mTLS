@@ -1,5 +1,3 @@
-Utan att förändra innehållet eller meningsformulering, ge kommandon och ord som kräver higghlight eller kursiv stil detta där det passar. Detta skall klistras in i Github, så formatera texten med tecken utefter detta:
-
 # x.509-Lab---Certificates-mTLS
 A lab highlighting the importances of safe and verifiable communication and information exchange, using mTLS.
 
