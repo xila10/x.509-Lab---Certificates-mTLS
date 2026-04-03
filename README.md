@@ -273,12 +273,13 @@ Not using HTTPS yet, trying to connect to port: 8080.
 
 **Opening the skrip: client.sh**
 
-Changing:
-TARGET_URL="http://{TARGET_SERVER_ADDRESS}:8080/"
+**Changing:**
+- TARGET_URL="http://{TARGET_SERVER_ADDRESS}:8080/"
 To:
-TARGET_URL="https://{TARGET_SERVER_ADDRESS}/"
+- TARGET_URL="https://{TARGET_SERVER_ADDRESS}/"
 
-Adding:
+**Adding:**
+````
 curl \
 --fail --silent --show-error \
 --connect-timeout 3 \
@@ -286,19 +287,20 @@ curl \
 --key /share/client1.key \
 --cacert /share/ca.crt \
 "${TARGET_URL}"
-
+````
 Success! With the correct authentication information, the client is granted access.
 
-**Wrapping up:**
--Demonstrated the core principles of secure communication using TLS and mutual TLS
+# Wrapping up:
+- Demonstrated the core principles of secure communication using TLS and mutual TLS
 through practical tests with curl and a webserver.
--Compared HTTP and HTTPS to illustrate the difference between unencrypted and
+- Compared HTTP and HTTPS to illustrate the difference between unencrypted and
 encrypted communication. When HTTP was disabled, access via port 8080 was no
 longer possible; demonstrating service exposure control through proper configuration.
--Introduced mTLS, where the server and the client present a certificate during
+- Introduced mTLS, where the server and the client present a certificate during
 connection establishment. They share the same ‘root of trust’; certificates are signed
 by the same CA. Also demonstrating a certificate and CA mismatch.
--When both sides are correctly configured the client will trust the server, the server will
+- When both sides are correctly configured the client will trust the server, the server will
 trust the client. They both have access to a matching CA, which has signed their
 respective certificates.
-Author: Niklas Norberg, ITHS25GS
+
+**Author: Niklas Norberg, ITHS25GS**
