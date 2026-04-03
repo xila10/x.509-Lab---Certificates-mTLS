@@ -20,7 +20,7 @@ information ("G"):
 - Demonstration of how the implemented changes improve security of the service
 ("before and after")
 
-1. Creating Certificate Authority (CA)
+# 1. Creating Certificate Authority (CA)
 Copy easy-rsa to home:
 cp -r /usr/share/easy-rsa ~/easy-rsa-lab
 cd ~/easy-rsa-lab
@@ -30,17 +30,14 @@ Initiate PKI:
 Location: ~/easy-rsa-lab
 Command: ./easyrsa init-pki
 
-
 Result:
 This creates the katalogue: pki/ (pki = public key infrastructure)
 Building CA:
 Command: ./easyrsa build-ca
 
-
 Promts me to:
 -Enter a password
 -Enter Common Name (CN)
-
 
 Purpose:
 -Used to sign and verify all certificates in the lab.
@@ -48,7 +45,6 @@ Purpose:
 It signs:
 -server certificates (nginx)
 -client certificates (curl)
-
 
 It is used by:
 -the client to trust the server
