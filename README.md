@@ -316,6 +316,8 @@ Using tcpdump sniff trafic:
 Command: sudo tcpdump -i lab-x509_tls port 443 -A
 
 Gives:
+
+
 This is encrypted HTTPS-traffic.
 
 **Without HTTPS:**
@@ -334,6 +336,8 @@ Pure plain text, unsafe HTTP-traffic!
 
 # Running docker-compose:
 **Wrong client settings:**
+
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Dockercom%201.png)
 
 We have demonstrated this using curl so far; this is what it looks like when the
 application runs without a correctly configured client:
@@ -357,6 +361,7 @@ curl \
 --cacert /share/ca.crt \
 "${TARGET_URL}"
 ````
+![Screenshot](https://github.com/xila10/x.509-Lab---Certificates-mTLS/blob/main/x.509%20Pics/Dockercom%202.png)
 - Success! With the correct authentication information, the client is granted access.
 
 # Wrapping up:
