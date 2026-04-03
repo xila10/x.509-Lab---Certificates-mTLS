@@ -353,7 +353,9 @@ Not using HTTPS yet, trying to connect to port: 8080.
 
 **Changing:**
 - `TARGET_URL="http://{TARGET_SERVER_ADDRESS}:8080/`
+
 To:
+
 - `TARGET_URL="https://{TARGET_SERVER_ADDRESS}/`
 
 **Adding:**
