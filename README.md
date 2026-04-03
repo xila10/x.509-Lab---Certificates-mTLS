@@ -168,8 +168,9 @@ warns if it is missing.
 **Signing client certificate:**
 - `./easyrsa sign-req client client1`
 
-**Signed certificate:** /home/vagrant/easy-rsa-lab/pki/issued/client1.crt
-‘klient_lab’ identifies with ‘client1’ related files.
+**Signed certificate:** 
+- `/home/vagrant/easy-rsa-lab/pki/issued/client1.crt`
+- ‘klient_lab’ identifies with ‘client1’ related files.
 
 **We now have the following:**
 - `pki/issued/client1.crt`
