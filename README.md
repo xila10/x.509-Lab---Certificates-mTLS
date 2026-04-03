@@ -90,7 +90,7 @@ warns if it is missing.
 - cp pki/private/sensitive-web-server.example.test.key /vagrant/x509_tls/server_share
 - cp pki/issued/sensitive-web-server.example.test.crt /vagrant/x509_tls/server_share
 
-#3. Creating client certificate
+# 3. Creating client certificate
 **Creating client key + CSR:**
 - cd ~/easy-rsa-lab
 - ./easyrsa gen-req client1 nopass
@@ -123,7 +123,7 @@ warns if it is missing.
 - signed by the CA
 - can be used to authenticate the client (mTLS)
 
-# Configuring the webserver (nginx)
+# 4. Configuring the webserver (nginx)
 
 **Entering:**
 - /vagrant/x509_tls/server.conf
@@ -151,7 +151,7 @@ The server now:
 - demands a client certificate to authenticate.
 - verifies the client certificate using its local CA trust store (ca.crt).
 
-**Tests:**
+## Tests:
 Restarting the stack, building anew: docker compose up -d –build.
 Will be using curl to test functions and demonstrate the differences in in accessibility and security.
 
